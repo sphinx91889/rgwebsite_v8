@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add custom styles for the embla carousel */
+.embla {
+  --slide-spacing: 1rem;
+  --slide-size: auto;
+  --slide-height: 42px;
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  transition: height 0.2s;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  position: relative;
+}
+
+/* Vertical carousel specific styles */
+.embla[data-axis="y"] .embla__container {
+  flex-direction: column;
+}
+
+.embla[data-axis="y"] .embla__slide {
+  height: auto;
+}
