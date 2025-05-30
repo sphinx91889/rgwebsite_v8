@@ -208,64 +208,62 @@ export const BlogPost = (): JSX.Element => {
       {/* Main Content */}
       <div className="pt-[235px] pb-24 px-4 md:px-8">
         <div className="max-w-[1280px] mx-auto">
-          <article className="max-w-4xl mx-auto">
-            {isLoading && (
-              <div className="flex justify-center items-center min-h-[200px]">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#188bf6]"></div>
-              </div>
-            )}
+          {isLoading && (
+            <div className="flex justify-center items-center min-h-[200px]">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#188bf6]"></div>
+            </div>
+          )}
 
-            {error && (
-              <div className="text-center text-red-600 py-8">
-                <p className="text-xl">Error: {error}</p>
-                <Button
-                  className="mt-4 bg-[#188bf6]"
-                  onClick={() => navigate("/blog")}
-                >
-                  Back to Blog
-                </Button>
-              </div>
-            )}
+          {error && (
+            <div className="text-center text-red-600 py-8">
+              <p className="text-xl">Error: {error}</p>
+              <Button
+                className="mt-4 bg-[#188bf6]"
+                onClick={() => navigate("/blog")}
+              >
+                Back to Blog
+              </Button>
+            </div>
+          )}
 
-            {post && (
-              <>
-                <Button
-                  className="mb-8 bg-[#188bf6]"
-                  onClick={() => navigate("/blog")}
-                >
-                  ← Back to Blog
-                </Button>
+          {post && (
+            <article className="prose prose-lg max-w-none">
+              <Button
+                className="mb-8 bg-[#188bf6]"
+                onClick={() => navigate("/blog")}
+              >
+                ← Back to Blog
+              </Button>
 
-                {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                  <img
-                    src={post._embedded["wp:featuredmedia"][0].source_url}
-                    alt={post.title.rendered}
-                    className="w-full h-[400px] object-cover rounded-xl mb-8"
-                  />
-                )}
-
-                <h1
-                  className="text-4xl md:text-5xl font-bold mb-4 font-['Montserrat']"
-                  dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                <img
+                  src={post._embedded["wp:featuredmedia"][0].source_url}
+                  alt={post.title.rendered}
+                  className="w-full h-[400px] object-cover rounded-xl mb-8"
                 />
+              )}
 
-                <p className="text-gray-500 mb-8 font-['Poppins']">
-                  {formatDate(post.date)}
-                </p>
+              <h1
+                className="text-4xl md:text-5xl font-bold mb-4 font-['Montserrat']"
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              />
 
-                <div className="blog-content-styles">
-                  {parse(post.content.rendered)}
-                </div>
+              <p className="text-gray-500 mb-8 font-['Poppins']">
+                {formatDate(post.date)}
+              </p>
 
-                <Button
-                  className="mt-8 bg-[#188bf6]"
-                  onClick={() => navigate("/blog")}
-                >
-                  ← Back to Blog
-                </Button>
-              </>
-            )}
-          </article>
+              <div className="blog-content font-['Poppins']">
+                {parse(post.content.rendered)}
+              </div>
+
+              <Button
+                className="mt-8 bg-[#188bf6]"
+                onClick={() => navigate("/blog")}
+              >
+                ← Back to Blog
+              </Button>
+            </article>
+          )}
         </div>
       </div>
 
