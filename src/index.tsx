@@ -8,6 +8,7 @@ import { Services } from "./screens/Services";
 import { Products } from "./screens/Products";
 import { Portfolio } from "./screens/Portfolio";
 import { Blog } from "./screens/Blog";
+import { BlogPost } from "./screens/BlogPost";
 import { Contact } from "./screens/Contact";
 import { Nexus } from "./screens/Nexus";
 import { ScrollToTop } from "./ScrollToTop";
@@ -24,6 +25,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/products" element={<Products />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/nexus" element={<Nexus />} />
       </Routes>

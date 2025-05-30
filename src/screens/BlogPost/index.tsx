@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
-import { Card, CardContent } from "../../components/ui/card";
-import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { SectionComponentNodeByAnima } from "../Homepage/sections/SectionComponentNodeByAnima/SectionComponentNodeByAnima";
+import parse from 'html-react-parser';
 
 interface BlogPost {
-  id: number;
   title: { rendered: string };
-  excerpt: { rendered: string };
-  slug: string;
+  content: { rendered: string };
   date: string;
   _embedded?: {
     "wp:featuredmedia"?: Array<{
@@ -18,10 +16,11 @@ interface BlogPost {
   };
 }
 
-export const Blog = (): JSX.Element => {
+export const BlogPost = (): JSX.Element => {
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,16 +33,20 @@ export const Blog = (): JSX.Element => {
   ];
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPost = async () => {
       try {
         const response = await fetch(
-          "https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=8&_embed"
+          `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?slug=${slug}&_embed`
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch posts");
+          throw new Error("Failed to fetch post");
         }
         const data = await response.json();
-        setPosts(data);
+        if (data.length > 0) {
+          setPost(data[0]);
+        } else {
+          throw new Error("Post not found");
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
@@ -51,8 +54,10 @@ export const Blog = (): JSX.Element => {
       }
     };
 
-    fetchPosts();
-  }, []);
+    if (slug) {
+      fetchPost();
+    }
+  }, [slug]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -203,10 +208,6 @@ export const Blog = (): JSX.Element => {
       {/* Main Content */}
       <div className="pt-[235px] pb-24 px-4 md:px-8">
         <div className="max-w-[1280px] mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-[64px] font-bold mb-12 text-center font-['Montserrat']">
-            Blog
-          </h1>
-
           {isLoading && (
             <div className="flex justify-center items-center min-h-[200px]">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#188bf6]"></div>
@@ -218,57 +219,50 @@ export const Blog = (): JSX.Element => {
               <p className="text-xl">Error: {error}</p>
               <Button
                 className="mt-4 bg-[#188bf6]"
-                onClick={() => window.location.reload()}
+                onClick={() => navigate("/blog")}
               >
-                Try Again
+                Back to Blog
               </Button>
             </div>
           )}
 
-          {!isLoading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <Card
-                  key={post.id}
-                  className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/blog/${post.slug}`)}
-                >
-                  <CardContent className="p-0">
-                    {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                      <div className="h-48 overflow-hidden">
-                        <img
-                          src={post._embedded["wp:featuredmedia"][0].source_url}
-                          alt={post.title.rendered}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h2
-                        className="text-xl font-bold mb-2 font-['Montserrat']"
-                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                      />
-                      <p className="text-gray-500 text-sm mb-4 font-['Poppins']">
-                        {formatDate(post.date)}
-                      </p>
-                      <div
-                        className="text-gray-600 font-['Poppins'] line-clamp-3"
-                        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                      />
-                      <Button
-                        className="mt-4 bg-[#188bf6]"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/blog/${post.slug}`);
-                        }}
-                      >
-                        Read More
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          {post && (
+            <article className="prose prose-lg max-w-none">
+              <Button
+                className="mb-8 bg-[#188bf6]"
+                onClick={() => navigate("/blog")}
+              >
+                ← Back to Blog
+              </Button>
+
+              {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                <img
+                  src={post._embedded["wp:featuredmedia"][0].source_url}
+                  alt={post.title.rendered}
+                  className="w-full h-[400px] object-cover rounded-xl mb-8"
+                />
+              )}
+
+              <h1
+                className="text-4xl md:text-5xl font-bold mb-4 font-['Montserrat']"
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              />
+
+              <p className="text-gray-500 mb-8 font-['Poppins']">
+                {formatDate(post.date)}
+              </p>
+
+              <div className="blog-content font-['Poppins']">
+                {parse(post.content.rendered)}
+              </div>
+
+              <Button
+                className="mt-8 bg-[#188bf6]"
+                onClick={() => navigate("/blog")}
+              >
+                ← Back to Blog
+              </Button>
+            </article>
           )}
         </div>
       </div>
