@@ -176,30 +176,30 @@ export const Sturgeon = (): JSX.Element => {
                 Matthew Sturgeon
               </h1>
               <h2 className="text-2xl text-[#188bf6] mb-4 font-['Poppins']">
-                Chief Sales Officer (CSO)
+                Chief Strategy Officer (CSO)
               </h2>
               
               <div className="prose prose-lg max-w-none">
                 <p className="text-lg text-gray-600 mb-6">
-                  Matthew Sturgeon serves as the Chief Sales Officer at Riviere Group, where he leads the company's business development initiatives and oversees the global sales strategy. With a proven track record in building and scaling high-performance sales teams, Matthew has been instrumental in driving Riviere Group's rapid growth and market expansion.
+                  Matthew Sturgeon serves as the Chief Strategy Officer at Riviere Group, where he leads the company's strategic initiatives and oversees global business development. With a proven track record in developing and executing comprehensive growth strategies, Matthew has been instrumental in driving Riviere Group's market expansion and organizational excellence.
                 </p>
 
                 <h3 className="text-xl font-bold mb-4">Role & Responsibilities</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                  <li>Develops and executes comprehensive sales strategies aligned with company objectives</li>
-                  <li>Leads and mentors the sales team to achieve ambitious growth targets</li>
+                  <li>Develops and executes comprehensive business strategies aligned with company objectives</li>
+                  <li>Leads strategic planning and organizational development initiatives</li>
                   <li>Establishes and maintains key client relationships across various industries</li>
-                  <li>Oversees the optimization of sales processes and implementation of sales technologies</li>
-                  <li>Collaborates with marketing to ensure aligned go-to-market strategies</li>
+                  <li>Oversees the optimization of business processes and implementation of strategic technologies</li>
+                  <li>Collaborates with leadership team to ensure aligned growth strategies</li>
                 </ul>
 
                 <h3 className="text-xl font-bold mb-4">Expertise</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                  <li>Strategic Sales Leadership</li>
+                  <li>Strategic Business Leadership</li>
                   <li>Team Building & Development</li>
                   <li>Business Development</li>
-                  <li>Client Relationship Management</li>
-                  <li>Sales Process Optimization</li>
+                  <li>Organizational Development</li>
+                  <li>Process Optimization</li>
                   <li>Market Analysis & Strategy</li>
                 </ul>
 

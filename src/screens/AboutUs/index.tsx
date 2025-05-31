@@ -36,7 +36,7 @@ export const AboutUs = (): JSX.Element => {
     },
     {
       name: "Matthew Sturgeon",
-      role: "Chief Sales Officer (CSO)",
+      role: "Chief Strategy Officer (CSO)",
       description: "Leads business development, sales strategy, and outbound initiatives. Manages sales team and client acquisition funnels.",
       image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6824d4e9583c67752f55e38a.png",
       division: "Executive Leadership",
