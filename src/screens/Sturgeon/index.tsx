@@ -217,13 +217,12 @@ export const Sturgeon = (): JSX.Element => {
                   >
                     Connect with Matthew
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#188bf6] text-[#188bf6] px-8 py-4"
-                    onClick={() => window.open("https://www.linkedin.com/in/matthew-sturgeon-cso", "_blank")}
+                  <a
+                    href="tel:904-509-5458"
+                    className="inline-flex items-center justify-center border border-[#188bf6] text-[#188bf6] px-8 py-4 rounded-md hover:bg-[#188bf6] hover:text-white transition-colors font-semibold"
                   >
-                    View LinkedIn Profile
-                  </Button>
+                    Call: (904) 509-5458
+                  </a>
                 </div>
               </div>
             </div>
