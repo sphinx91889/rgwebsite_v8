@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, Calendar, Tag } from "lucide-react";
 import { SectionComponentNodeByAnima } from "../Homepage/sections/SectionComponentNodeByAnima/SectionComponentNodeByAnima";
 import parse from 'html-react-parser';
 
@@ -9,6 +9,9 @@ interface BlogPost {
   title: { rendered: string };
   content: { rendered: string };
   date: string;
+  id: number;
+  excerpt?: { rendered: string };
+  categories?: number[];
   _embedded?: {
     "wp:featuredmedia"?: Array<{
       source_url: string;
@@ -23,6 +26,7 @@ export const BlogPost = (): JSX.Element => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
 
   const menuItems = [
     { name: "About us", path: "/about-us" },
@@ -44,6 +48,19 @@ export const BlogPost = (): JSX.Element => {
         const data = await response.json();
         if (data.length > 0) {
           setPost(data[0]);
+          // Fetch related posts by category
+          const postId = data[0].id;
+          const categories = data[0].categories;
+          if (categories && categories.length > 0) {
+            const catId = categories[0];
+            const relatedRes = await fetch(
+              `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=${catId}&exclude=${postId}&per_page=2&_embed`
+            );
+            if (relatedRes.ok) {
+              const relatedData = await relatedRes.json();
+              setRelatedPosts(relatedData);
+            }
+          }
         } else {
           throw new Error("Post not found");
         }
@@ -227,41 +244,87 @@ export const BlogPost = (): JSX.Element => {
           )}
 
           {post && (
-            <article className="prose prose-lg max-w-none">
-              <Button
-                className="mb-8 bg-[#188bf6]"
-                onClick={() => navigate("/blog")}
-              >
-                ← Back to Blog
-              </Button>
-
+            <article className="w-full bg-white rounded-none shadow-none overflow-visible">
+              {/* Hero Section */}
               {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                <img
-                  src={post._embedded["wp:featuredmedia"][0].source_url}
-                  alt={post.title.rendered}
-                  className="w-full h-[400px] object-cover rounded-xl mb-8"
-                />
+                <div className="w-full h-56 sm:h-80 md:h-[420px] lg:h-[520px] overflow-hidden">
+                  <img
+                    src={post._embedded["wp:featuredmedia"][0].source_url}
+                    alt={post.title.rendered}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
               )}
-
-              <h1
-                className="text-4xl md:text-5xl font-bold mb-4 font-['Montserrat']"
-                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-              />
-
-              <p className="text-gray-500 mb-8 font-['Poppins']">
-                {formatDate(post.date)}
-              </p>
-
-              <div className="blog-content font-['Poppins']">
-                {parse(post.content.rendered)}
+              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-8 pb-4">
+                <div className="flex flex-wrap items-center gap-4 mb-4">
+                  <span className="inline-flex items-center gap-2 text-gray-500 text-sm">
+                    <Calendar className="w-4 h-4" /> {formatDate(post.date)}
+                  </span>
+                  {/* Placeholder author */}
+                  <span className="inline-flex items-center gap-2 text-gray-500 text-sm">
+                    <User className="w-4 h-4" /> Mevin Riviere
+                  </span>
+                  {/* Placeholder tags */}
+                  <span className="inline-flex items-center gap-2 text-gray-500 text-sm">
+                    <Tag className="w-4 h-4" /> Blog
+                  </span>
+                </div>
+                <h1
+                  className="text-4xl md:text-5xl font-bold mb-6 font-['Montserrat'] leading-tight"
+                  dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                />
               </div>
-
-              <Button
-                className="mt-8 bg-[#188bf6]"
-                onClick={() => navigate("/blog")}
-              >
-                ← Back to Blog
-              </Button>
+              {/* Content */}
+              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8">
+                <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800">
+                  {parse(post.content.rendered)}
+                </div>
+              </div>
+              {/* Author Card */}
+              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8">
+                <div className="flex items-center gap-4 bg-gray-50 rounded-lg p-4 mt-8">
+                  <img
+                    src="https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6841ba57628b7f45fe01c943.jpeg"
+                    alt="Author"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-white shadow"
+                  />
+                  <div>
+                    <div className="font-semibold text-lg">Mevin Riviere</div>
+                    <div className="text-gray-500 text-sm">Founder & Blogger</div>
+                  </div>
+                </div>
+              </div>
+              {/* Related Posts Section */}
+              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-12">
+                <div className="mt-12">
+                  <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <Tag className="w-5 h-5 text-[#188bf6]" /> Related Posts
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {relatedPosts.length === 0 && (
+                      <div className="text-gray-500 italic">No related posts found.</div>
+                    )}
+                    {relatedPosts.map((rel) => (
+                      <div key={rel.id} className="bg-white rounded-xl shadow p-4 flex flex-col gap-2 border hover:shadow-lg transition">
+                        {rel._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                          <img
+                            src={rel._embedded["wp:featuredmedia"][0].source_url}
+                            alt={rel.title.rendered}
+                            className="w-full h-40 object-cover rounded mb-2"
+                          />
+                        )}
+                        <div className="font-semibold text-lg" dangerouslySetInnerHTML={{ __html: rel.title.rendered }} />
+                        {rel.excerpt && (
+                          <div className="text-gray-500 text-sm" dangerouslySetInnerHTML={{ __html: rel.excerpt.rendered }} />
+                        )}
+                        <button className="mt-2 text-[#188bf6] font-semibold text-sm text-left" onClick={() => navigate(`/blog/${rel.id}`)}>
+                          Read More →
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </article>
           )}
         </div>
