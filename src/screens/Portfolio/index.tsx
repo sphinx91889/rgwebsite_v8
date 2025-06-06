@@ -19,6 +19,37 @@ export const Portfolio = (): JSX.Element => {
 
   const portfolioItems = [
     {
+      title: "RedSnipe.io",
+      subtitle: "Capture Business Opportunities",
+      category: "AI Business Analyzer",
+      description:
+        "Analyze Reddit posts to uncover valuable business insights and engagement opportunities using AI-powered analysis.",
+      videoUrl:
+        "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6842f21e70766a527bac1b0b.mov",
+      logoUrl: "https://redsnipe.io/logo.svg",
+      tags: ["AI", "Reddit", "Business Intelligence", "Opportunity Analyzer"],
+      type: "video",
+      features: [
+        "AI-powered Reddit analysis",
+        "Business opportunity detection",
+        "Engagement insights",
+        "Quick links: Get Started, Sign in, Home, Pricing, Analyzer, How does it work?, Settings, RoadMap"
+      ],
+      badge: "Featured",
+      links: {
+        getStarted: "https://redsnipe.io/get-started",
+        signIn: "https://redsnipe.io/sign-in",
+        home: "https://redsnipe.io/",
+        pricing: "https://redsnipe.io/pricing",
+        analyzer: "https://redsnipe.io/analyzer",
+        howItWorks: "https://redsnipe.io/how-it-works",
+        settings: "https://redsnipe.io/settings",
+        roadmap: "https://redsnipe.io/roadmap",
+      },
+      contact: "info@therivieregroup.org",
+      copyright: "© 2025 Riviere Group",
+    },
+    {
       title: "Black Note Management",
       subtitle: "Elevating Careers, 1 Note at a Time",
       category: "Web Design & Artist Management",
