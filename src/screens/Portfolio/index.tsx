@@ -122,13 +122,6 @@ export const Portfolio = (): JSX.Element => {
         "1-on-1 Mentorship",
         "Community Support",
       ],
-      launchDate: "JUNE 1, 2025",
-      mentor: {
-        name: "Mev",
-        title: "BVC Mentor",
-        description:
-          "Vibe coder with multiple contracted builds for Insurance, Healthcare, Medical Spa, Roofing, Music Rights, Reputation Management industries.",
-      },
       link: "https://banvibecoders.com/",
     },
     {
@@ -390,27 +383,6 @@ export const Portfolio = (): JSX.Element => {
                       <p className="text-lg text-gray-600 mb-6 font-['Poppins']">
                         {item.description}
                       </p>
-                      {item.launchDate && (
-                        <div className="bg-black text-white p-4 rounded-lg mb-6">
-                          <p className="text-sm mb-2">OFFICIAL LAUNCH DATE</p>
-                          <p className="text-xl font-bold">{item.launchDate}</p>
-                        </div>
-                      )}
-                      {item.mentor && (
-                        <div className="bg-gray-100 p-4 rounded-lg mb-6">
-                          <div className="flex items-center gap-4 mb-3">
-                            <div className="text-lg font-semibold">
-                              {item.mentor.name}
-                            </div>
-                            <div className="text-sm text-gray-600">
-                              {item.mentor.title}
-                            </div>
-                          </div>
-                          <p className="text-sm text-gray-600">
-                            {item.mentor.description}
-                          </p>
-                        </div>
-                      )}
                       {item.stats && (
                         <div className="grid grid-cols-3 gap-4 mb-6">
                           {Object.entries(item.stats).map(([key, value]) => (
