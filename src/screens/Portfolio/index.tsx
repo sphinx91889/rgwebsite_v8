@@ -125,6 +125,25 @@ export const Portfolio = (): JSX.Element => {
       link: "https://banvibecoders.com/",
     },
     {
+      title: "FSY4CC.com",
+      subtitle: "Streamlined Group Registration for Youth Conferences",
+      category: "Web Design & Automation",
+      description:
+        "FSY4CC is an engaging and user-friendly platform designed to streamline group registrations for youth conferences.",
+      videoUrl:
+        "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/68485ad62c3d7625d869982f.mp4",
+      tags: ["Web Design", "Automation", "PayPal Integration", "Group Registration"],
+      type: "video",
+      features: [
+        "Fully custom web design",
+        "Custom automation workflows",
+        "PayPal payment integration",
+        "Seamless custom group registration workflow"
+      ],
+      link: "https://fsy4cc.com/",
+      showVisitSite: true,
+    },
+    {
       title: "FADE'EM UP",
       subtitle: "Experience the Art of Barbering at Fade 'Em Up",
       category: "Web Design",
@@ -431,6 +450,13 @@ export const Portfolio = (): JSX.Element => {
                           </span>
                         ))}
                       </div>
+                      {item.showVisitSite && item.link && (
+                        <Button asChild className="mt-4 w-full bg-[#188bf6] text-white">
+                          <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            Visit Site
+                          </a>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -248,9 +248,9 @@ export const BlogPost = (): JSX.Element => {
               {/* Hero Section */}
               {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
                 <div className="w-full h-56 sm:h-80 md:h-[420px] lg:h-[520px] overflow-hidden">
-                  <img
-                    src={post._embedded["wp:featuredmedia"][0].source_url}
-                    alt={post.title.rendered}
+                <img
+                  src={post._embedded["wp:featuredmedia"][0].source_url}
+                  alt={post.title.rendered}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
@@ -269,15 +269,15 @@ export const BlogPost = (): JSX.Element => {
                     <Tag className="w-4 h-4" /> Blog
                   </span>
                 </div>
-                <h1
+              <h1
                   className="text-4xl md:text-5xl font-bold mb-6 font-['Montserrat'] leading-tight"
-                  dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                />
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              />
               </div>
               {/* Content */}
               <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8">
                 <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800">
-                  {parse(post.content.rendered)}
+                {parse(post.content.rendered)}
                 </div>
               </div>
               {/* Author Card */}
