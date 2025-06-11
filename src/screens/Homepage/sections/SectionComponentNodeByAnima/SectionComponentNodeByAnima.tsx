@@ -164,6 +164,13 @@ export const SectionComponentNodeByAnima = (): JSX.Element => {
               >
                 Employee Portal
               </Button>
+              <Button
+                variant="outline"
+                className="w-full border-[#188bf6] text-[#188bf6] hover:bg-[#188bf6] hover:text-white transition-colors"
+                onClick={() => navigate("/client-login")}
+              >
+                Client Login
+              </Button>
             </div>
           </div>
         </div>

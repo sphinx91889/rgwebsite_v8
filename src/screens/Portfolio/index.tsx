@@ -322,25 +322,6 @@ export const Portfolio = (): JSX.Element => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes goldGlow {
-          0%,
-          100% {
-            color: #ffd700;
-            text-shadow: 0 0 10px #ffd700;
-          }
-          50% {
-            color: #ffb700;
-            text-shadow: 0 0 20px #ffb700;
-          }
-        }
-
-        .gold-glow {
-          animation: goldGlow 2s ease-in-out infinite;
-          font-weight: bold;
-        }
-      `}</style>
-
       {/* Hero Section */}
       <section className="pt-[235px] pb-24 px-4 md:px-8">
         <div className="max-w-[1280px] mx-auto text-center">

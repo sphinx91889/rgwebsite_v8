@@ -14,6 +14,7 @@ import { Sturgeon } from "./screens/Sturgeon";
 import { Nicole } from "./screens/Nicole";
 import { Mevin } from "./screens/Mevin";
 import { Nexus } from "./screens/Nexus";
+import ClientLogin from "./screens/ClientLogin";
 import { ScrollToTop } from "./ScrollToTop";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
@@ -34,6 +35,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/nicole" element={<Nicole />} />
         <Route path="/mevin" element={<Mevin />} />
         <Route path="/nexus" element={<Nexus />} />
+        <Route path="/client-login" element={<ClientLogin />} />
       </Routes>
     </Router>
   </StrictMode>,
