@@ -167,7 +167,7 @@ export const SectionComponentNodeByAnima = (): JSX.Element => {
               <Button
                 variant="outline"
                 className="w-full border-[#188bf6] text-[#188bf6] hover:bg-[#188bf6] hover:text-white transition-colors"
-                onClick={() => navigate("/client-login")}
+                onClick={() => window.open("https://cosmic-bienenstitch-305a6d.netlify.app", "_blank")}
               >
                 Client Login
               </Button>
