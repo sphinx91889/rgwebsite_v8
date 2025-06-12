@@ -49,13 +49,6 @@ export const AboutUs = (): JSX.Element => {
       division: "Creative & Marketing Division",
     },
     {
-      name: "Jay Ardon",
-      role: "UI/UX Designer",
-      description: "Designs high-conversion landing pages, builds out Figma prototypes, and crafts front-end visuals for Riviere Group brands and client projects.",
-      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6824d5e2684111590df21daf.jpeg",
-      division: "Creative & Marketing Division",
-    },
-    {
       name: "Elijah Monjardin",
       role: "Frontend/Backend AI Hybrid Developer",
       description: "Translates design into responsive code using modern frameworks. Implements visuals, UI behavior, and feature integrations.",
