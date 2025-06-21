@@ -49,6 +49,13 @@ export const AboutUs = (): JSX.Element => {
       division: "Creative & Marketing Division",
     },
     {
+      name: "Maritza Glover",
+      role: "Brand Growth Strategist",
+      description: "Orchestrates brand deployment across physical & digital touchpoints, aligns B2C marketing, advises leadership with operational wisdom, and expands client acquisition channels.",
+      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6856954642e8efa37d1b4fe8.jpeg",
+      division: "Creative & Marketing Division",
+    },
+    {
       name: "Elijah Monjardin",
       role: "Frontend/Backend AI Hybrid Developer",
       description: "Translates design into responsive code using modern frameworks. Implements visuals, UI behavior, and feature integrations.",
@@ -60,6 +67,13 @@ export const AboutUs = (): JSX.Element => {
       role: "Frontend/Backend AI Hybrid Developer",
       description: "Handles database structures, APIs, and functionality across platforms. Ensures scalability, performance, and technical optimization.",
       image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6824d6609cd8fb27389a1972.jpeg",
+      division: "Development Division",
+    },
+    {
+      name: "April Jermaine",
+      role: "WordPress & WooCommerce Specialist",
+      description: "Expert in creating and customizing WordPress sites with Elementor, managing WooCommerce, and ensuring seamless plugin and payment integrations.",
+      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6856932f2b584a613dd33ace.jpeg",
       division: "Development Division",
     },
   ];
@@ -198,7 +212,7 @@ export const AboutUs = (): JSX.Element => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes goldGlow {
           0%,
           100% {
