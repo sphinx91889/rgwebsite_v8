@@ -19,6 +19,23 @@ interface BlogPost {
   };
 }
 
+// Utility to add IDs to headings and extract ToC
+function processHtmlAndExtractToc(html) {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  const headings = Array.from(tempDiv.querySelectorAll('h1, h2, h3'));
+  const toc = headings.map(h => {
+    let id = h.id || h.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+    h.id = id;
+    return {
+      text: h.textContent,
+      id,
+      level: parseInt(h.tagName[1], 10),
+    };
+  });
+  return { htmlWithIds: tempDiv.innerHTML, toc };
+}
+
 export const BlogPost = (): JSX.Element => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -27,6 +44,8 @@ export const BlogPost = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [toc, setToc] = useState([]);
+  const [htmlWithIds, setHtmlWithIds] = useState<string | null>(null);
 
   const menuItems = [
     { name: "About us", path: "/about-us" },
@@ -48,6 +67,10 @@ export const BlogPost = (): JSX.Element => {
         const data = await response.json();
         if (data.length > 0) {
           setPost(data[0]);
+          // Add ToC logic here
+          const { htmlWithIds, toc } = processHtmlAndExtractToc(data[0].content.rendered);
+          setHtmlWithIds(htmlWithIds);
+          setToc(toc);
           // Fetch related posts by category
           const postId = data[0].id;
           const categories = data[0].categories;
@@ -274,10 +297,26 @@ export const BlogPost = (): JSX.Element => {
                 dangerouslySetInnerHTML={{ __html: post.title.rendered }}
               />
               </div>
-              {/* Content */}
-              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8">
-                <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800">
-                {parse(post.content.rendered)}
+              {/* Content + ToC */}
+              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8 flex flex-col lg:flex-row gap-8">
+                {toc.length > 0 && (
+                  <aside className="lg:w-1/4 mb-8 lg:mb-0 lg:sticky lg:top-36 self-start bg-gray-50 rounded-xl p-4 border border-gray-100 shadow-sm">
+                    <div className="font-bold text-lg mb-4">Table of Contents</div>
+                    <ul className="space-y-2">
+                      {toc.map(item => (
+                        <li key={item.id} className={`pl-${(item.level - 1) * 4}`}>
+                          <a href={`#${item.id}`} className="text-[#188bf6] hover:underline text-sm block">
+                            {item.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
+                )}
+                <div className={toc.length > 0 ? "lg:w-3/4" : "w-full"}>
+                  <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800">
+                    {parse(htmlWithIds || post.content.rendered)}
+                  </div>
                 </div>
               </div>
               {/* Author Card */}
