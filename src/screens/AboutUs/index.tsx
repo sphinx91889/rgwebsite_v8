@@ -56,6 +56,13 @@ export const AboutUs = (): JSX.Element => {
       division: "Creative & Marketing Division",
     },
     {
+      name: "Chester Horlador",
+      role: "UI/UX designer",
+      description: "Specializes in crafting intuitive and visually engaging user interfaces and experiences for digital products.",
+      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/685b77d175aa239081027850.jpeg",
+      division: "Creative & Marketing Division",
+    },
+    {
       name: "Elijah Monjardin",
       role: "Frontend/Backend AI Hybrid Developer",
       description: "Translates design into responsive code using modern frameworks. Implements visuals, UI behavior, and feature integrations.",
@@ -265,7 +272,11 @@ export const AboutUs = (): JSX.Element => {
                           <img 
                             src={member.image} 
                             alt={member.name} 
-                            className="w-full h-full object-cover object-center"
+                            className={
+                              member.name === "Chester Horlador"
+                                ? "w-full h-full object-contain object-center bg-gray-100"
+                                : "w-full h-full object-cover object-center"
+                            }
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                             <div className="p-6 text-white">
