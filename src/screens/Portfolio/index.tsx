@@ -19,6 +19,59 @@ export const Portfolio = (): JSX.Element => {
 
   const portfolioItems = [
     {
+      title: "MyClassyWellness.com",
+      subtitle: "Weight Loss Medications Shipped Directly To You",
+      category: "E-Commerce, Telehealth, Branding",
+      description: (
+        <>
+          <div className="font-semibold mb-2">What We Delivered:</div>
+          <ul className="list-disc list-inside space-y-1 text-base">
+            <li>Professional logo and brand identity</li>
+            <li>Custom graphics that outclass competitors</li>
+            <li>Complete e-commerce platform</li>
+            <li>Medical clearance integration with telehealth provider</li>
+            <li>Full email infrastructure</li>
+            <li>Domain acquisition and setup</li>
+          </ul>
+        </>
+      ),
+      videoUrl:
+        "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6877d341c019ad8d2a5876a5.mp4",
+      tags: ["E-Commerce", "Telehealth", "Branding", "Weight Loss", "Rapid Launch", "$3M+ Sales"],
+      type: "video",
+      features: [
+        "Logo & brand identity design",
+        "Custom graphics & visuals",
+        "Domain & email infrastructure setup",
+        "Full e-commerce site (Day 1 ready)",
+        "Custom medical clearance plugin",
+        "Telehealth provider integration",
+        "Frictionless sales funnel"
+      ],
+      link: "https://myclassywellness.com",
+      showVisitSite: true,
+    },
+    {
+      title: "UltraTrim Wellness Clinic",
+      subtitle: "Medical Spa in Palm Desert, CA",
+      category: "Web Design & Video Integration",
+      description:
+        "A modern, results-driven medical spa offering advanced wellness and aesthetic treatments in Palm Desert, CA. The site features a clean, inviting design, seamless video integration, and clear calls to action for client engagement.",
+      videoUrl:
+        "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6877d148841b29800e5f0d8a.mp4",
+      tags: ["Web Design", "Medical Spa", "Wellness", "Palm Desert", "Video"],
+      type: "video",
+      features: [
+        "Modern medical spa website",
+        "Video hero section",
+        "Service highlights",
+        "Online booking integration",
+        "Mobile-optimized design"
+      ],
+      link: "https://ultratrimclinic.com",
+      showVisitSite: true,
+    },
+    {
       title: "RedSnipe.io",
       subtitle: "Capture Business Opportunities",
       category: "AI Business Analyzer",
