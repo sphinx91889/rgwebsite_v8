@@ -50,7 +50,7 @@ export const AboutUs = (): JSX.Element => {
     },
     {
       name: "Maritza Glover",
-      role: "Brand Growth Strategist",
+      role: "Chief Growth Strategist",
       description: "Orchestrates brand deployment across physical & digital touchpoints, aligns B2C marketing, advises leadership with operational wisdom, and expands client acquisition channels.",
       image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/685af54c2b37dc33ea82deb2.png",
       division: "Executive Leadership",
