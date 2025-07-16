@@ -35,6 +35,13 @@ export const AboutUs = (): JSX.Element => {
       division: "Executive Leadership",
     },
     {
+      name: "Maritza Glover",
+      role: "Chief Growth Strategist",
+      description: "Orchestrates brand deployment across physical & digital touchpoints, aligns B2C marketing, advises leadership with operational wisdom, and expands client acquisition channels.",
+      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/685af54c2b37dc33ea82deb2.png",
+      division: "Executive Leadership",
+    },
+    {
       name: "Matthew Sturgeon",
       role: "Chief Strategy Officer (CSO)",
       description: "Leads business development, sales strategy, and outbound initiatives. Manages sales team and client acquisition funnels.",
@@ -47,13 +54,6 @@ export const AboutUs = (): JSX.Element => {
       description: "Develops and schedules brand content, executes marketing campaigns, manages growth across social platforms, and provides content briefs.",
       image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6824d585583c67546955e57d.png",
       division: "Creative & Marketing Division",
-    },
-    {
-      name: "Maritza Glover",
-      role: "Chief Growth Strategist",
-      description: "Orchestrates brand deployment across physical & digital touchpoints, aligns B2C marketing, advises leadership with operational wisdom, and expands client acquisition channels.",
-      image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/685af54c2b37dc33ea82deb2.png",
-      division: "Executive Leadership",
     },
     {
       name: "Chester Horlador",
