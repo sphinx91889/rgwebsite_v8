@@ -119,7 +119,7 @@ export const Blog = (): JSX.Element => {
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 w-full z-50">
         <div className="bg-white bg-opacity-90 backdrop-filter backdrop-blur-md py-11">
-          <div className="w-full max-w-[1280px] mx-auto px-5 flex items-center justify-between">
+          <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div
               className="flex items-center cursor-pointer"
               onClick={() => navigate("/")}
@@ -201,8 +201,8 @@ export const Blog = (): JSX.Element => {
       `}</style>
 
       {/* Main Content */}
-      <div className="pt-[235px] pb-24 px-4 md:px-8">
-        <div className="max-w-[1280px] mx-auto">
+      <div className="pt-[235px] pb-24 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-[1400px] mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-[64px] font-bold mb-12 text-center font-['Montserrat']">
             Blog
           </h1>
@@ -226,16 +226,16 @@ export const Blog = (): JSX.Element => {
           )}
 
           {!isLoading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
               {posts.map((post) => (
                 <Card
                   key={post.id}
-                  className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full"
                   onClick={() => navigate(`/blog/${post.slug}`)}
                 >
-                  <CardContent className="p-0">
+                  <CardContent className="p-0 h-full flex flex-col">
                     {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                      <div className="h-48 overflow-hidden">
+                      <div className="h-48 lg:h-56 overflow-hidden">
                         <img
                           src={post._embedded["wp:featuredmedia"][0].source_url}
                           alt={post.title.rendered}
@@ -243,20 +243,20 @@ export const Blog = (): JSX.Element => {
                         />
                       </div>
                     )}
-                    <div className="p-6">
+                    <div className="p-4 lg:p-6 flex-1 flex flex-col">
                       <h2
-                        className="text-xl font-bold mb-2 font-['Montserrat']"
+                        className="text-lg lg:text-xl font-bold mb-2 font-['Montserrat'] line-clamp-2"
                         dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                       />
                       <p className="text-gray-500 text-sm mb-4 font-['Poppins']">
                         {formatDate(post.date)}
                       </p>
                       <div
-                        className="text-gray-600 font-['Poppins'] line-clamp-3"
+                        className="text-gray-600 font-['Poppins'] line-clamp-3 flex-1"
                         dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                       />
                       <Button
-                        className="mt-4 bg-[#188bf6]"
+                        className="mt-4 bg-[#188bf6] w-fit"
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(`/blog/${post.slug}`);

@@ -189,7 +189,7 @@ export const BlogPost = (): JSX.Element => {
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 w-full z-50">
         <div className="bg-white bg-opacity-90 backdrop-filter backdrop-blur-md py-11">
-          <div className="w-full max-w-[1280px] mx-auto px-5 flex items-center justify-between">
+          <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div
               className="flex items-center cursor-pointer"
               onClick={() => navigate("/")}
@@ -271,8 +271,8 @@ export const BlogPost = (): JSX.Element => {
       `}</style>
 
       {/* Main Content */}
-      <div className="pt-[235px] pb-24 px-4 md:px-8">
-        <div className="max-w-[1280px] mx-auto">
+      <div className="pt-[235px] pb-24 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-[1400px] mx-auto">
           {isLoading && (
             <div className="flex justify-center items-center min-h-[200px]">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#188bf6]"></div>
@@ -303,7 +303,7 @@ export const BlogPost = (): JSX.Element => {
                   />
                 </div>
               )}
-              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pt-8 pb-4">
+              <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-8 pb-4">
                 <div className="flex flex-wrap items-center gap-4 mb-4">
                   <span className="inline-flex items-center gap-2 text-gray-500 text-sm">
                     <Calendar className="w-4 h-4" /> {formatDate(post.date)}
@@ -318,12 +318,12 @@ export const BlogPost = (): JSX.Element => {
                   </span>
                 </div>
               <h1
-                  className="text-4xl md:text-5xl font-bold mb-6 font-['Montserrat'] leading-tight"
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-['Montserrat'] leading-tight"
                 dangerouslySetInnerHTML={{ __html: post.title.rendered }}
               />
               </div>
               {/* Content + ToC */}
-              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8 flex flex-col lg:flex-row gap-8">
+              <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pb-8 flex flex-col lg:flex-row gap-8">
                 {toc.length > 0 && (
                   <aside className="lg:w-1/4 mb-8 lg:mb-0 lg:sticky lg:top-36 self-start bg-gray-50 rounded-xl p-4 border border-gray-100 shadow-sm">
                     <div className="font-bold text-lg mb-4">Table of Contents</div>
@@ -339,13 +339,13 @@ export const BlogPost = (): JSX.Element => {
                   </aside>
                 )}
                 <div className={toc.length > 0 ? "lg:w-3/4" : "w-full"}>
-                  <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800">
+                  <div className="prose prose-lg max-w-none font-['Poppins'] text-gray-800 prose-headings:font-['Montserrat'] prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl">
                     {parse(htmlWithIds || post.content.rendered)}
                   </div>
                 </div>
               </div>
               {/* Author Card */}
-              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-8">
+              <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pb-8">
                 <div className="flex items-center gap-4 bg-gray-50 rounded-lg p-4 mt-8">
                   <img
                     src="https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6841ba57628b7f45fe01c943.jpeg"
@@ -359,7 +359,7 @@ export const BlogPost = (): JSX.Element => {
                 </div>
               </div>
               {/* Related Posts Section */}
-              <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 pb-12">
+              <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pb-12">
                 <div className="mt-12">
                   <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                     <Tag className="w-5 h-5 text-[#188bf6]" /> Related Posts
