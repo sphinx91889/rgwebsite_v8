@@ -72,7 +72,7 @@ export const AboutUs = (): JSX.Element => {
     {
       name: "John Arpon",
       role: "Frontend/Backend AI Hybrid Developer",
-      description: "Handles database structures, APIs, and functionality across platforms. Ensures scalability, performance, and technical optimization.",
+      description: "Handles database structures, APIs, and functionality across platforms. Ensures scalability, performance, and technical optimizations.",
       image: "https://storage.googleapis.com/msgsndr/8ngdMjJjmckUW3DffAfv/media/6824d6609cd8fb27389a1972.jpeg",
       division: "Development Division",
     },
