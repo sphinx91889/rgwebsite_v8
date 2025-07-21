@@ -8,8 +8,9 @@ import { FrameByAnima } from "./sections/FrameByAnima";
 import { FrameWrapperByAnima } from "./sections/FrameWrapperByAnima/FrameWrapperByAnima";
 import { HeroSectionByAnima } from "./sections/HeroSectionByAnima";
 import { SectionComponentNodeByAnima } from "./sections/SectionComponentNodeByAnima/SectionComponentNodeByAnima";
+import { withSEO } from "../../components/withSEO";
 
-export const Homepage = (): JSX.Element => {
+const HomepageComponent = (): JSX.Element => {
   // Company logos data for mapping
   const companyLogos = [
     { src: "/fictional-company-logo-4.svg", alt: "Fictional company" },
@@ -88,3 +89,6 @@ export const Homepage = (): JSX.Element => {
     </div>
   );
 };
+
+// Export the component wrapped with SEO
+export const Homepage = withSEO(HomepageComponent);

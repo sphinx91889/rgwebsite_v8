@@ -1,5 +1,25 @@
 User-agent: *
 Allow: /
 
-# Allow all crawlers
+# Block private/client pages
+Disallow: /client-login
+
+# Block admin areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow important assets
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://therivieregroup.org/sitemap.xml
+
+# Additional sitemaps for different content types
+Sitemap: https://therivieregroup.org/sitemap-blog.xml
+Sitemap: https://therivieregroup.org/sitemap-portfolio.xml

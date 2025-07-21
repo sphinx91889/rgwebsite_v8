@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { SplashScreen } from "./components/SplashScreen";
 import { Homepage } from "./screens/Homepage";
 import { AboutUs } from "./screens/AboutUs";
@@ -21,24 +22,26 @@ console.log('React app starting...');
 
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<SplashScreen />} />
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/sturgeon" element={<Sturgeon />} />
-        <Route path="/nicole" element={<Nicole />} />
-        <Route path="/mevin" element={<Mevin />} />
-        <Route path="/nexus" element={<Nexus />} />
-        <Route path="/client-login" element={<ClientLogin />} />
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<SplashScreen />} />
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/sturgeon" element={<Sturgeon />} />
+          <Route path="/nicole" element={<Nicole />} />
+          <Route path="/mevin" element={<Mevin />} />
+          <Route path="/nexus" element={<Nexus />} />
+          <Route path="/client-login" element={<ClientLogin />} />
+        </Routes>
+      </Router>
+    </HelmetProvider>
   </StrictMode>,
 );
