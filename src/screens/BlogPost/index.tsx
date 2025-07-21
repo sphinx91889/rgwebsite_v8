@@ -10,6 +10,7 @@ interface BlogPost {
   content: { rendered: string };
   date: string;
   id: number;
+  slug?: string;
   excerpt?: { rendered: string };
   categories?: number[];
   _embedded?: {
@@ -20,20 +21,25 @@ interface BlogPost {
 }
 
 // Utility to add IDs to headings and extract ToC
-function processHtmlAndExtractToc(html) {
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-  const headings = Array.from(tempDiv.querySelectorAll('h1, h2, h3'));
-  const toc = headings.map(h => {
-    let id = h.id || h.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
-    h.id = id;
-    return {
-      text: h.textContent,
-      id,
-      level: parseInt(h.tagName[1], 10),
-    };
-  });
-  return { htmlWithIds: tempDiv.innerHTML, toc };
+function processHtmlAndExtractToc(html: string) {
+  try {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const headings = Array.from(tempDiv.querySelectorAll('h1, h2, h3'));
+    const toc = headings.map(h => {
+      let id = h.id || h.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '') || '';
+      h.id = id;
+      return {
+        text: h.textContent || '',
+        id,
+        level: parseInt(h.tagName[1], 10),
+      };
+    });
+    return { htmlWithIds: tempDiv.innerHTML, toc };
+  } catch (error) {
+    console.error('Error processing HTML:', error);
+    return { htmlWithIds: html, toc: [] };
+  }
 }
 
 export const BlogPost = (): JSX.Element => {
@@ -44,8 +50,11 @@ export const BlogPost = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
-  const [toc, setToc] = useState([]);
+  const [toc, setToc] = useState<any[]>([]);
   const [htmlWithIds, setHtmlWithIds] = useState<string | null>(null);
+
+  // Immediate test render
+  console.log('BlogPost rendering with slug:', slug);
 
   const menuItems = [
     { name: "About us", path: "/about-us" },
@@ -56,15 +65,30 @@ export const BlogPost = (): JSX.Element => {
   ];
 
   useEffect(() => {
+    console.log('BlogPost component mounted, slug:', slug);
+    
     const fetchPost = async () => {
+      if (!slug) {
+        setError("No slug provided");
+        setIsLoading(false);
+        return;
+      }
+
       try {
+        console.log('Fetching post with slug:', slug);
         const response = await fetch(
-          `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?slug=${slug}&_embed`
+          `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`
         );
+        
+        console.log('Response status:', response.status);
+        
         if (!response.ok) {
-          throw new Error("Failed to fetch post");
+          throw new Error(`Failed to fetch post: ${response.status} ${response.statusText}`);
         }
+        
         const data = await response.json();
+        console.log('Fetched data:', data);
+        
         if (data.length > 0) {
           setPost(data[0]);
           // Add ToC logic here
@@ -76,9 +100,9 @@ export const BlogPost = (): JSX.Element => {
           const categories = data[0].categories;
           if (categories && categories.length > 0) {
             const catId = categories[0];
-                      const relatedRes = await fetch(
-            `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=${catId}&exclude=${postId}&per_page=2&_embed&_fields=id,title,excerpt,slug,date,_embedded`
-          );
+            const relatedRes = await fetch(
+              `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=${catId}&exclude=${postId}&per_page=2&_embed&_fields=id,title,excerpt,slug,date,_embedded`
+            );
             if (relatedRes.ok) {
               const relatedData = await relatedRes.json();
               setRelatedPosts(relatedData);
@@ -88,15 +112,14 @@ export const BlogPost = (): JSX.Element => {
           throw new Error("Post not found");
         }
       } catch (err) {
+        console.error('Error fetching post:', err);
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (slug) {
-      fetchPost();
-    }
+    fetchPost();
   }, [slug]);
 
   const formatDate = (dateString: string) => {
@@ -109,6 +132,18 @@ export const BlogPost = (): JSX.Element => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Immediate fallback - always show something */}
+      <div className="fixed top-0 left-0 z-[9999] bg-red-100 p-2 text-xs">
+        BlogPost Component Loaded - Slug: {slug || 'undefined'}
+      </div>
+      
+      {/* Debug info - remove in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed top-8 left-0 z-[9999] bg-yellow-100 p-2 text-xs">
+          Debug: loading={isLoading.toString()}, error={error || 'none'}
+        </div>
+      )}
+      
       {/* Mobile menu button */}
       <button
         className="xl2:hidden fixed bottom-4 right-4 z-50 bg-white rounded-full p-3 shadow-lg border border-gray-100"
