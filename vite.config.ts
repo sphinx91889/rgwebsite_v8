@@ -24,5 +24,13 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+    // Ensure proper asset handling
+    assetsInlineLimit: 4096,
+  },
+  // Ensure proper module resolution
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
   },
 });
