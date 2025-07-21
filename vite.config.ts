@@ -13,7 +13,15 @@ export default defineConfig({
   },
   // Handle SPA routing
   server: {
-    historyApiFallback: true,
+    port: 5174,
+    host: true,
+    historyApiFallback: {
+      index: '/index.html',
+      rewrites: [
+        { from: /^\/blog\/.*/, to: '/index.html' },
+        { from: /^\/.*/, to: '/index.html' }
+      ]
+    },
   },
   build: {
     outDir: "dist",

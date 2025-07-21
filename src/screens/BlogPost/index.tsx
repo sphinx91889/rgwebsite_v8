@@ -76,9 +76,9 @@ export const BlogPost = (): JSX.Element => {
           const categories = data[0].categories;
           if (categories && categories.length > 0) {
             const catId = categories[0];
-            const relatedRes = await fetch(
-              `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=${catId}&exclude=${postId}&per_page=2&_embed`
-            );
+                      const relatedRes = await fetch(
+            `https://t1e.afa.myftpupload.com/wp-json/wp/v2/posts?categories=${catId}&exclude=${postId}&per_page=2&_embed&_fields=id,title,excerpt,slug,date,_embedded`
+          );
             if (relatedRes.ok) {
               const relatedData = await relatedRes.json();
               setRelatedPosts(relatedData);
@@ -356,7 +356,7 @@ export const BlogPost = (): JSX.Element => {
                         {rel.excerpt && (
                           <div className="text-gray-500 text-sm" dangerouslySetInnerHTML={{ __html: rel.excerpt.rendered }} />
                         )}
-                        <button className="mt-2 text-[#188bf6] font-semibold text-sm text-left" onClick={() => navigate(`/blog/${rel.id}`)}>
+                        <button className="mt-2 text-[#188bf6] font-semibold text-sm text-left" onClick={() => navigate(`/blog/${rel.slug}`)}>
                           Read More →
                         </button>
                       </div>
