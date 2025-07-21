@@ -17,6 +17,8 @@ import { Nexus } from "./screens/Nexus";
 import ClientLogin from "./screens/ClientLogin";
 import { ScrollToTop } from "./ScrollToTop";
 
+console.log('React app starting...');
+
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <Router>

@@ -15,13 +15,7 @@ export default defineConfig({
   server: {
     port: 5174,
     host: true,
-    historyApiFallback: {
-      index: '/index.html',
-      rewrites: [
-        { from: /^\/blog\/.*/, to: '/index.html' },
-        { from: /^\/.*/, to: '/index.html' }
-      ]
-    },
+    historyApiFallback: true,
   },
   build: {
     outDir: "dist",
