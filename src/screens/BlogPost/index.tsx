@@ -132,17 +132,7 @@ export const BlogPost = (): JSX.Element => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Immediate fallback - always show something */}
-      <div className="fixed top-0 left-0 z-[9999] bg-red-100 p-2 text-xs">
-        BlogPost Component Loaded - Slug: {slug || 'undefined'}
-      </div>
-      
-      {/* Debug info - remove in production */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="fixed top-8 left-0 z-[9999] bg-yellow-100 p-2 text-xs">
-          Debug: loading={isLoading.toString()}, error={error || 'none'}
-        </div>
-      )}
+
       
       {/* Mobile menu button */}
       <button
@@ -261,7 +251,7 @@ export const BlogPost = (): JSX.Element => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes goldGlow {
           0%,
           100% {
